@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<title>Vesta</title>
+<link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
+<style>
+*{
+	font-family: 'Caveat', cursive;
+}
+html { font-size: 24px; height: 100%; }
+
+body { 
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	margin: 0;
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	padding-top: 5%;
+	/**/
+	background: url('./stars.gif'), no-repeat center/100% 100% url('./gradient.png');
+	background-blend-mode: screen;
+}
+
+canvas {
+	position: absolute;
+	top: 0;
+	z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+.notepad-container {
+	transform: rotateZ(5deg);
+	max-width: 500px;
+	width: 100%;
+	box-shadow: 1px 1px 0px #6666cc, 2px 2px 0px #6666cc, 3px 3px 0px #6666cc, 4px 4px 0px #6666cc, 5px 5px 0px #6666cc, 6px 6px 0px #6666cc;
+	background: linear-gradient(185deg, #6666cc90, #ebabda90, #f5dce690);
+}
+
+.notepad-line {
+	display: flex;
+	flex-direction: row;
+	border-left: #ff3333;
+	line-height: 2rem;
+	border-bottom: blue 1px solid;
+}
+
+
+
+.margin {
+	border-right: 1px red solid;
+	width: 15%;
+}
+
+.margin div {
+	width: 95%;
+	height: 100%;
+	border-right: 1px red solid;
+}
+
+
+.notepad-header {
+	font-family: 'Russo One', sans-serif;
+	font-size: 2rem;
+	color: #00000000;
+	 -webkit-text-stroke: 1px black;
+	height: 100px;
+	background: url('https://web.archive.org/web/20090728055050/http://www.geocities.com/kawaii_amethist/starbg.gif'), #6666cc;
+	background-blend-mode: screen;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.notepad-line {
+	font-size: 1rem;
+	width: 100%;
+}
+
+.glitch {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	opacity: .1;
+}
+
+.cat {
+	position: absolute;
+	width: 200px;
+	bottom: 0;
+}
+.relativecat {
+	position: relative;
+	width: 200px;
+	top: -100px;
+	transform: rotateZ(10deg);
+}
+
+.squish {
+	width: 0;
+	height: 0;
+}
+
+
+
+</style>
+<div class="notepad-container">
+	<div class="notepad-header">
+		<div class='squish'><img class="relativecat" src="cat01.gif"/></div>
+		Love & Dreams
+	</div>
+	<div class='notepad-line'>
+		<div class='margin'>
+			<div></div>
+		</div>
+		<div class='main'>
+			Dear Vesta Gheibi
+		</div>
+	</div>
+	<div class='notepad-line'>
+		<div class='margin'>
+			<div></div>
+		</div>
+		<div class='main'>
+			I have tentative plans to purchase a cat.
+		</div>
+	</div>
+	<div class='notepad-line'>
+		<div class='margin'>
+			<div></div>
+		</div>
+		<div class='main'>
+			My love for you will make sure of that.
+		</div>
+	</div>
+	<div class='notepad-line'>
+		<div class='margin'>
+			<div></div>
+		</div>
+		<div class='main'>
+			You can name him, fluff? demon? or diddles?
+		</div>
+	</div>
+	<div class='notepad-line'>
+		<div class='margin'>
+			<div></div>
+		</div>
+		<div class='main'>
+			But you'll have to teach kitty where to piddle.
+		</div>
+	</div>
+	<div class='notepad-line'>
+		<div class='margin'>
+			<div></div>
+		</div>
+		<div class='main'>
+			I'm sure that he will climb the curtains.
+		</div>
+	</div>
+	<div class='notepad-line'>
+		<div class='margin'>
+			<div></div>
+		</div>
+		<div class='main'>
+			but he'll be a cutie pie, that's for certain.
+		</div>
+	</div>
+	<div class='notepad-line'>
+		<div class='margin'>
+			<div></div>
+		</div>
+		<div class='main'>
+			I'll sniff and sneeze but despite all that,
+		</div>
+	</div>
+	<div class='notepad-line'>
+		<div class='margin'>
+			<div></div>
+		</div>
+		<div class='main'>
+			I have tentative plans to purchase a cat.
+		</div>
+	</div>
+	<div class='notepad-line'>
+		<div class='margin'>
+			<div></div>
+		</div>
+		<div class='main'>
+			&nbsp;
+		</div>
+	</div>
+	<div class='notepad-line'>
+		<div class='margin'>
+			<div></div>
+		</div>
+		<div class='main'>
+			Happy Birthday I love you.
+		</div>
+	</div>
+		<div class='notepad-line'>
+		<div class='margin'>
+			<div></div>
+		</div>
+		<div class='main'>
+			&nbsp;
+		</div>
+	</div>
+	
+</div>
+
+<img class="cat" src="cat02.gif" style="left: 15vw; width: 350px"/>
+<img class="cat" src="cat03.gif" style="left: 60vw"/>
+<img class="cat" src="cat04.gif" style="left: 80vw"/>
+<canvas></canvas>
+<script>
+const canvas = document.getElementsByTagName('canvas')[0]
+var width, height
+const ctx = canvas.getContext('2d')
+var resize = window.onresize = function() {
+  canvas.width = (width = canvas.clientWidth) * devicePixelRatio;
+  canvas.height = (height = canvas.clientHeight) * devicePixelRatio;
+  ctx.scale(devicePixelRatio, devicePixelRatio) // For high dpi display support
+}
+resize()
+
+</script>
+<script src="game.js"></script>
